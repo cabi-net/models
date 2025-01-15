@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Resize</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/GLTFLoader.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .image, .model {
+            position: absolute;
+            resize: both;
+            overflow: auto;
+            cursor: move;
+            border: 1px dashed #333;
+        }
+        .image img, model-viewer {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .resize-handle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #333;
+            bottom: 0;
+            right: 0;
+            cursor: se-resize;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="image" style="left: 50px; top: 50px; width: 150px;">
+            <img src="graphics/ayicik.png">
+            <div class="resize-handle"></div>
+        </div>
+        <div class="image" style="left: 300px; top: 100px; width: 200px;">
+            <img src="graphics/hellokittys.png">
+            <div class="resize-handle"></div>
+        </div>
+        <div class="model" style="left: 400px; top: 200px; width: 300px;">
+           <model-viewer src="graphics/poly1.glb" alt="3D Model" auto-rotate camera-controls></model-viewer>
+           <div class="resize-handle"></div>
+        </div>
+    </div>
+
+    <script>
+        const elements = document.querySelectorAll('.image, .model');
+
+        elements.forEach(element => {
+            const resizeHandle = element.querySelector('.resize-handle');
+            element.addEventListener('mousedown', startDrag);
+            element.addEventListener('mousedown', bringToFront);
+            resizeHandle.addEventListener('mousedown', startResize);
+        });
+
+        let zIndex = 1; // To ensure the last clicked element is on top
+
+        function bringToFront(e) {
+            e.target.closest('.image, .model').style.zIndex = zIndex++;
+        }
+
+        function startDrag(e) {
+            const element = e.target.closest('.image, .model');
+
+            const startX = e.clientX;
+            const startY = e.clientY;
+            const rect = element.getBoundingClientRect();
+
+            const offsetX = startX - rect.left;
+            const offsetY = startY - rect.top;
+
+            function onMouseMove(e) {
+                const newX = e.clientX - offsetX;
+                const newY = e.clientY - offsetY;
+
+                element.style.left = `${newX}px`;
+                element.style.top = `${newY}px`;
+            }
+
+            function onMouseUp() {
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+
+            e.preventDefault();
+        }
+
+        function startResize(e) {
+            e.stopPropagation(); // Prevent triggering drag when resizing
+
+            const element = e.target.closest('.image, .model');
+            const startX = e.clientX;
+            const startY = e.clientY;
+            const startWidth = parseInt(document.defaultView.getComputedStyle(element).width, 10);
+            const startHeight = parseInt(document.defaultView.getComputedStyle(element).height, 10);
+            const aspectRatio = startWidth / startHeight;
+
+            function onMouseMove(e) {
+                const deltaX = e.clientX - startX;
+                let newWidth = startWidth + deltaX;
+                let newHeight = newWidth / aspectRatio;
+
+                // Ensure resizing doesn't shrink to negative values
+                if (newWidth > 0 && newHeight > 0) {
+                    element.style.width = `${newWidth}px`;
+                    element.style.height = `${newHeight}px`;
+                }
+            }
+
+            function onMouseUp() {
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        }
+    </script>
+    <button id="extract-btn" style="position: fixed; top: 10px; left: 10px; z-index: 999;">Extract Positions and Sizes</button>
+
+    <script>
+        document.getElementById('extract-btn').addEventListener('click', () => {
+            const elements = document.querySelectorAll('.image, .model');
+            const data = Array.from(elements).map(el => {
+                const style = window.getComputedStyle(el);
+                return {
+                    type: el.classList.contains('model') ? '3D Model' : 'Image',
+                    left: parseFloat(style.left),
+                    top: parseFloat(style.top),
+                    width: parseFloat(style.width),
+                    height: parseFloat(style.height)
+                };
+            });
+            console.log('Extracted Data:', data);
+        });
+    </script>
+
+</body>
+</html>
