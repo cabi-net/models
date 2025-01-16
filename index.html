@@ -69,6 +69,13 @@
       border-radius: 10px;
     }
 
+    .object model-viewer {
+      width: 100%;
+      max-width: 300px;
+      height: 300px;
+    }
+
+
     .description {
       flex: 1;
       font-size: 16px;
@@ -106,7 +113,13 @@
         <p>This is a description of the first 3D object.</p>
       </div>
       <div class="object">
-        <model-viewer src="poly1.glb" alt="3D Object 1" auto-rotate camera-controls></model-viewer>
+        <model-viewer 
+          src="poly1.glb" 
+          alt="3D Object 1" 
+          auto-rotate 
+          camera-controls 
+          background-color="#f9f9f9">
+        </model-viewer>
       </div>
     </div>
 
@@ -117,7 +130,13 @@
         <p>This is a description of the second 3D object.</p>
       </div>
       <div class="object">
-        <img src="https://www.artrage.com/wp-content/uploads/Pencil-Mouse-1.png" alt="3D Object 2">
+        <model-viewer 
+          src="object2.glb" 
+          alt="3D Object 2" 
+          auto-rotate 
+          camera-controls 
+          background-color="#f9f9f9">
+        </model-viewer>
       </div>
     </div>
 
@@ -128,10 +147,15 @@
         <p>This is a description of the third 3D object.</p>
       </div>
       <div class="object">
-        <img src="https://www.artrage.com/wp-content/uploads/iNK-Pen-Mouse-296x300.png" alt="3D Object 3">
+        <model-viewer 
+          src="object3.glb" 
+          alt="3D Object 3" 
+          auto-rotate 
+          camera-controls 
+          background-color="#f9f9f9">
+        </model-viewer>
       </div>
     </div>
-
     <!-- Item 4 -->
 <!--     <div class="gallery-item">
       <div class="description">
