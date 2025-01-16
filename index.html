@@ -1,12 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Model Test</title>
-    <script type="module" src="model-viewer.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url(https://www.artrage.com/wp-content/uploads/iNK-Pen-Mouse-296x300.png);
+    }
+
+    /* Header Section */
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      margin-right: 20px;
+    }
+
+    .decorative-images {
+      display: flex;
+      gap: 10px;
+    }
+
+    .decorative-images img {
+      width: 30px;
+      height: 30px;
+    }
+
+    /* Gallery Layout */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .gallery-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .gallery-item:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
+    .object {
+      flex: 1;
+      text-align: center;
+    }
+
+    .object img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+    }
+
+    .description {
+      flex: 1;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      .gallery-item {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Header Section -->
+  <header class="header">
+    <img src="https://www.artrage.com/wp-content/uploads/Glitter-Mouse-218x300.png" alt="Logo" class="logo">
+<!--     <div class="decorative-images">
+      <img src="decor1.png" alt="Decorative Image 1">
+      <img src="decor2.png" alt="Decorative Image 2">
+      <img src="decor3.png" alt="Decorative Image 3">
+    </div> -->
+  </header>
+
+  <!-- Gallery Section -->
+  <section class="gallery">
+    <!-- Item 1 -->
+    <div class="gallery-item">
+      <div class="description">
+        <h3>Object 1</h3>
+        <p>This is a description of the first 3D object.</p>
+      </div>
+      <div class="object">
+        <img src="https://www.artrage.com/wp-content/uploads/Felt-Pen-Mouse-1-2-1024x555.png" alt="3D Object 1">
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="gallery-item">
+      <div class="description">
+        <h3>Object 2</h3>
+        <p>This is a description of the second 3D object.</p>
+      </div>
+      <div class="object">
+        <img src="https://www.artrage.com/wp-content/uploads/Pencil-Mouse-1.png" alt="3D Object 2">
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="gallery-item">
+      <div class="description">
+        <h3>Object 3</h3>
+        <p>This is a description of the third 3D object.</p>
+      </div>
+      <div class="object">
+        <img src="https://www.artrage.com/wp-content/uploads/iNK-Pen-Mouse-296x300.png" alt="3D Object 3">
+      </div>
+    </div>
+
+    <!-- Item 4 -->
+<!--     <div class="gallery-item">
+      <div class="description">
+        <h3>Object 4</h3>
+        <p>This is a description of the fourth 3D object.</p>
+      </div>
+      <div class="object">
+        <img src="object4.png" alt="3D Object 4">
+      </div>
+    </div>
+  </section> -->
+
+</body>
+</html>
+
+
+
+<!-- <body>
     <model-viewer 
         src="poly1.glb" 
         alt="A 3D model" 
@@ -14,5 +156,5 @@
         camera-controls 
         style="width: 100%; height: 100vh;">
     </model-viewer>
-</body>
-</html>
+</body> -->
+
