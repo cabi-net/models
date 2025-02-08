@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module" src="model-viewer.min.js"></script>
+  <title>Gallery</title>
+  <style>
+    
+    
+    @font-face {
+      font-family: 'ardenwood';  /* Define a name for your custom font */
+      src: url('fonts/ArdenwoodDemo.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    .arden {
+      font-family: 'ardenwood', Arial, sans-serif;  /* Apply the custom font */
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      /* background-image: url(http://www.backgroundsarchive.com/images/pub/4/4802v5d750u8gy.jpg); */
+      background-color: black;
+    }
+
+    /* Header Section */
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      /* background-color: #333; */
+      color: white;
+    }
+
+    .logo {
+      width: 300px;
+      height: auto;
+      margin-right: 20px;
+    }
+
+    .decorative-images {
+      display: flex;
+      gap: 10px;
+    }
+
+    .decorative-images img {
+      width: 30px;
+      height: 30px;
+    }
+
+    /* Gallery Layout */
+    .gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding-top: 10px;  /* Reduced top padding */
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+    .gallery-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .gallery-item:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
+    .object {
+      flex: 1;
+      text-align: center;
+    }
+
+    .object img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+    }
+
+    .object model-viewer {
+      width: 100%;
+      max-width: 500px;
+      height: 500px;
+    }
+
+
+    .description {
+      flex: 1;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      .gallery-item {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+   <!-- Audio Player -->
+   <audio controls>
+    <source src="sıla.wav" type="audio/wav">
+    Your browser does not support the audio element.
+    </audio>
+
+  <!-- Header Section -->
+  <header class="header">
+    <a href="index.html"><img src="cabinet logo.png" alt="Logo" class="logo"></a>
+<!--     <div class="decorative-images">
+      <img src="decor1.png" alt="Decorative Image 1">
+      <img src="decor2.png" alt="Decorative Image 2">
+      <img src="decor3.png" alt="Decorative Image 3">
+    </div> -->
+  </header>
+
+  <!-- Gallery Section -->
+  <section class="gallery">
+    <!-- Item 1 -->
+    <div class="gallery-item">
+      <div class="description">
+        <a href="http://www.gigaglitters.com/"><img src="http://www.gigaglitters.com/created/ZYMhXPRBed.gif" width="212"  height="67" border="0" alt="http://www.rasaint.net/ - Glitter Graphics"></a><br><a href="http://www.gigaglitters.com/"></a>
+        <p>This is a description of the first 3D object.</p>
+      </div>
+      <div class="object">
+        <model-viewer 
+          src="poly1.glb" 
+          alt="3D Object 1" 
+          auto-rotate 
+          camera-controls 
+          background-color="#f9f9f9">
+        </model-viewer>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="gallery-item">
+      <div class="description">
+        <h3 class="arden">anjo</h3>
+        <p>This is a description of the second 3D object.</p>
+      </div>
+      <div class="object">
+        <model-viewer 
+          src="poly2.glb" 
+          alt="3D Object 2" 
+          auto-rotate 
+          camera-controls 
+          background-color="#f9f9f9">
+        </model-viewer>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="gallery-item">
+      <div class="description">
+        <h3>Object 3</h3>
+        <p>This is a description of the third 3D object.</p>
+      </div>
+      <div class="object">
+        <model-viewer 
+          src="object3.glb" 
+          alt="3D Object 3" 
+          auto-rotate 
+          camera-controls 
+          background-color="#f9f9f9">
+        </model-viewer>
+      </div>
+    </div>
+    <!-- Item 4 -->
+<!--     <div class="gallery-item">
+      <div class="description">
+        <h3>Object 4</h3>
+        <p>This is a description of the fourth 3D object.</p>
+      </div>
+      <div class="object">
+        <img src="object4.png" alt="3D Object 4">
+      </div>
+    </div>
+  </section> -->
+
+</body>
+</html>
+
+
+
+<!-- <body>
+    <model-viewer 
+        src="poly1.glb" 
+        alt="A 3D model" 
+        auto-rotate 
+        camera-controls 
+        style="width: 100%; height: 100vh;">
+    </model-viewer>
+</body> -->
+
